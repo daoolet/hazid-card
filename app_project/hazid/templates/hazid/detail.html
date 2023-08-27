@@ -1,0 +1,18 @@
+{% extends "hazid/base.html" %}
+
+{% block title %} Detail of HAZID Card {% endblock %}
+
+
+{% block content %}
+    <ul>
+        <li>{{ survey.title }}</a></li>
+        <li>{{ survey.created_at }}</li>
+        <li>{{ survey.date }}</li>
+        <li>{{ survey.time }}</li>
+        <li>{{ survey.location }}</li>
+        <li>{{ survey.company_observed }}</li>
+        <li>{{ survey.activity_observed }}</li>
+        <li>{{ survey.i_obseved }}</li>
+        <li>{{ survey.possible_consequences }}</li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "hazid/base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+   <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        {% for f in form %}
+            <p>
+                <label for="{{ f.id_for_label }}">{{ f.label }}: </label>{{ f }}
+            </p>
+            <div class="form-error">{{ f.errors }}</div>
+        {% endfor %}
+
+
+       <p><input type="submit" value="Зарегистрироваться"></p>
+   </form>
+{% endblock %}

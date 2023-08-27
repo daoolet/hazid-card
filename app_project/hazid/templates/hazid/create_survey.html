@@ -1,0 +1,13 @@
+{% extends "hazid/base.html" %}
+
+{% block title %} Create a HAZID Card {% endblock %}
+
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Create HAZID Card</button>
+    </form>
+{% endblock %}

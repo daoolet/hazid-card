@@ -1,0 +1,17 @@
+{% extends "hazid/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <form action="/login/" method="post">
+        {% csrf_token %}
+        
+        <div class="form-error">{{ form.non_field_errors }}</div>
+        {% for f in form %}
+            <p><label class="form-label" for="{{ f.id_for_label}}">{{ f.label }}</label>{{ f }}</p>
+            <div class="form-eror">{{ f.errors }}</div>
+        {% endfor %}
+
+        <p><input type="submit" value="Login"></p>
+    </form>
+{% endblock %}
