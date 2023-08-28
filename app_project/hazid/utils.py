@@ -1,3 +1,8 @@
+YES_NO_CHOICES = [
+    (True, "Yes"),
+    (False, "No"),
+]
+
 ACTIVITY_OBSERVED = [
     ("Lifting/Rigging", "Lifting/Rigging"),
     ("Piping", "Piping"),
@@ -23,6 +28,38 @@ I_OBSERVED = [
 ]
 
 POSSIBLE_CONSEQUENCES = [
-    ("A", "A"),
+    ("Injury/Illness", "Injury/Illness"),
+    ("Environmental damage/spill", "Environmental damage/spill"),
+    ("Equipment/property damage/loss", "Equipment/property damage/loss"),
+    ("Fire", "Fire"),
+    ("Motor vehicle accident", "Motor vehicle accident"),
+]
 
+CONDITIONS_RELATED = [
+    ("Barricade/hole cover", "Barricade/hole cover"),
+    ("Confined space", "Confined space"),
+    ("Crane/Rigging/Certifications/Plans", "Crane/Rigging/Certifications/Plans"),
+    ("Energy isolation (LOTO)", "Energy isolation (LOTO)"),
+    ("Excavation", "Excavation"),
+    ("Slip/trip/fall", "Slip/trip/fall"),
+    ("Fire", "Fire"),
+    ("Housekeeping", "Housekeeping"),
+    ("Hot work", "Hot work"),
+    ("Work permits/PPHA/JSA", "Work permits/PPHA/JSA"),
+    ("Spill", "Spill"),
+    ("Dropped Object/Gravity", "Dropped Object/Gravity"),
+    ("Respiratory", "Respiratory"),
+    ("Human and machine interface (HMI)", "Human and machine interface (HMI)"),
+    ("Ladder/work platform", "Ladder/work platform"),
+    ("Working @ Heights", "Working @ Heights"),
+    ("Material handling", "Material handling"),
+    ("Motorized equipment/vehicle", "Motorized equipment/vehicle"),
+    ("PPE", "PPE"),
+    ("Procedure compliance", "Procedure compliance"),
+    ("Manual Handling", "Manual Handling"),
+    ("Tools/equipment", "Tools/equipment"),
+    ("Pinch point/Line of fire", "Pinch point/Line of fire"),
+    ("Winterization", "Winterization"),
+    ("Lighting/Illumination", "Lighting/Illumination"),
+    ("Hand protection", "Hand protection"),
 ]

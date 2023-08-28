@@ -1,8 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
+from multiselectfield import MultiSelectField
 
-from .utils import ACTIVITY_OBSERVED, I_OBSERVED, POSSIBLE_CONSEQUENCES
+from .utils import ACTIVITY_OBSERVED, I_OBSERVED, POSSIBLE_CONSEQUENCES, CONDITIONS_RELATED, YES_NO_CHOICES
 
 
 class CustomUserManager(BaseUserManager):
@@ -27,9 +28,8 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
     
 
-class CustomUser(AbstractBaseUser):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
-    # Добавьте нужные поля профиля
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
@@ -51,9 +51,17 @@ class Survey(models.Model):
     time = models.TimeField()
     location = models.CharField(max_length=35)
     company_observed = models.CharField(max_length=20)
-    activity_observed = models.CharField(max_length=30, choices=ACTIVITY_OBSERVED)
-    i_obseved = models.CharField(max_length=24, choices=I_OBSERVED, default="None")
-    possible_consequences = models.CharField(max_length=24, choices=POSSIBLE_CONSEQUENCES, default="None")
+    activity_observed = models.CharField(max_length=27, choices=ACTIVITY_OBSERVED, default=None)
+    i_observed = models.CharField(max_length=21, choices=I_OBSERVED, default="None")
+    possible_consequences = MultiSelectField(max_length=31, choices=POSSIBLE_CONSEQUENCES)
+    conditions_related = MultiSelectField(max_length=36, choices=CONDITIONS_RELATED)
+    description = models.CharField(max_length=300)
+    swa_applied = models.BooleanField(choices=YES_NO_CHOICES, default=False)
+    corrective_measures = models.BooleanField(choices=YES_NO_CHOICES, default=False)
+    further_action = models.BooleanField(choices=YES_NO_CHOICES, default=False)
+    corrective_action = models.CharField(max_length=150)
+    reported = models.BooleanField(choices=YES_NO_CHOICES, default=False)
+    if_reported = models.CharField(max_length=150)
 
     class Meta:
         verbose_name = "survey"

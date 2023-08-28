@@ -6,7 +6,36 @@
 {% block content %}
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="container" id="create-survey-intro">
+            <div class="row" id="create-survey-intro-row1">
+                <div class="col-md-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">Title</li>
+                        <li class="list-group-item">Date</li>
+                        <li class="list-group-item">Time</li>
+                        <li class="list-group-item">Location</li>
+                        <li class="list-group-item">Company Observed</li>
+                        <li class="list-group-item">Activity Observed</li>
+                        <li class="list-group-item">I Observed</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-8">
+                    <ul class="list-group">
+                        <li class="list-group-item">{{ form.title }}</li>
+                        <li class="list-group-item">{{ form.date }}</li>
+                        <li class="list-group-item">{{ form.time }}</li>
+                        <li class="list-group-item">{{ form.location }}</li>
+                        <li class="list-group-item">{{ form.company_observed }}</li>
+                        <li class="list-group-item">{{ form.activity_observed }}</li>
+                        <li class="list-group-item">{{ form.i_obseved }}</li>
+                    </ul>
+            </div>
+        
+        
+        
+        
+        </div>
 
         <button type="submit">Create HAZID Card</button>
     </form>
