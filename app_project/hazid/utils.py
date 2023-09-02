@@ -33,6 +33,7 @@ POSSIBLE_CONSEQUENCES = [
     ("Equipment/property damage/loss", "Equipment/property damage/loss"),
     ("Fire", "Fire"),
     ("Motor vehicle accident", "Motor vehicle accident"),
+    ("Other", "Other"),
 ]
 
 CONDITIONS_RELATED = [

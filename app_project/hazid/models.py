@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.utils import timezone
 
 from multiselectfield import MultiSelectField
 
@@ -44,7 +45,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 class Survey(models.Model):
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    created_at = models.DateField(auto_now=True)
+    created_at = models.DateTimeField(default=timezone.now)
 
     title = models.CharField(max_length=50)
     date = models.DateField()
@@ -53,15 +54,15 @@ class Survey(models.Model):
     company_observed = models.CharField(max_length=20)
     activity_observed = models.CharField(max_length=27, choices=ACTIVITY_OBSERVED, default=None)
     i_observed = models.CharField(max_length=21, choices=I_OBSERVED, default="None")
-    possible_consequences = MultiSelectField(max_length=31, choices=POSSIBLE_CONSEQUENCES)
-    conditions_related = MultiSelectField(max_length=36, choices=CONDITIONS_RELATED)
+    possible_consequences = MultiSelectField(max_length=255, choices=POSSIBLE_CONSEQUENCES)
+    conditions_related = MultiSelectField(max_length=500, choices=CONDITIONS_RELATED)
     description = models.CharField(max_length=300)
-    swa_applied = models.BooleanField(choices=YES_NO_CHOICES, default=False)
-    corrective_measures = models.BooleanField(choices=YES_NO_CHOICES, default=False)
-    further_action = models.BooleanField(choices=YES_NO_CHOICES, default=False)
+    swa_applied = models.BooleanField(default=False)
+    corrective_measures = models.BooleanField(default=False)
+    further_action = models.BooleanField(default=False)
     corrective_action = models.CharField(max_length=150)
-    reported = models.BooleanField(choices=YES_NO_CHOICES, default=False)
-    if_reported = models.CharField(max_length=150)
+    reported = models.BooleanField(default=False)
+    if_reported = models.CharField(max_length=100, blank=True)
 
     class Meta:
         verbose_name = "survey"
