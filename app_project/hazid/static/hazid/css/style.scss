@@ -30,8 +30,12 @@
     a.nav-link:hover {
         color: red;
     }
+}
 
-
+.card {
+    .card-header {
+        background-color: rgb(100, 192, 200);
+    }
 }
 
 // REGISTER & LOGIN
@@ -64,7 +68,7 @@
         }
     
         .form-control {
-            width: 1500px;
+            width: 500px;
         }
     }
 
@@ -98,7 +102,11 @@
     }
 
     .row:nth-child(odd) {
-        background-color: cyan;
+        background-color: #93D0FF;
+    }
+
+    #description {
+        overflow-y: auto;
     }
 
 }

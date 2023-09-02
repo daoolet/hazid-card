@@ -1,48 +1,14 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.views import View
-from django.http import HttpResponseRedirect
+from django.db.models import Count
 
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required, permission_required
 
 
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-
-
 from .forms import SurveyForm, LoginUserForm, RegisterUserForm
 from .models import Survey
-
-
-# @api_view(["GET"])
-# def index(request):
-#     surveys = Survey.objects.all()
-#     serializer = SurveySerializer(surveys, many=True)
-#     return Response(serializer.data)
-
-# @api_view(["POST"])
-# def create_survey(request):
-#     serializer = SurveySerializer(data=request.data)
-#     if serializer.is_valid():
-#         survey = serializer.save()
-#         return Response({
-#             "detail": "Successful",
-#             "survey_id": survey.id,
-#         })
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# @api_view(["GET"])
-# def read_survey(request, survey_id):
-#     survey = get_object_or_404(Survey, pk=survey_id)
-#     serializer = SurveySerializer(survey)
-#     return Response(serializer.data)
-
-# @api_view(["GET"])
-# def read_all_surveys(request):
-#     pass
 
 def index(request):
     surveys = Survey.objects.all()
@@ -98,3 +64,26 @@ def custom_login(request):
         form = LoginUserForm()
     return render(request, "registration/login.html", {"form": form})
 
+def stats(request):
+
+    observed_counts = Survey.objects.values('i_observed').annotate(count=Count('i_observed'))
+
+    context = {
+        "observed_counts": observed_counts,
+    }
+    return render(request, "hazid/stats.html", context)
+
+
+def winners(request):
+
+    context = {
+
+    }
+    return render(request, "hazid/winners.html", context)
+
+def qr(request):
+        
+    context = {
+
+    }
+    return render(request, "hazid/qr.html", context)

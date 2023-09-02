@@ -25,6 +25,10 @@
   color: red;
 }
 
+.card .card-header {
+  background-color: rgb(100, 192, 200);
+}
+
 #form-group-register, #form-group-login {
   margin-top: 15px;
 }
@@ -45,7 +49,7 @@
   padding-bottom: 5px;
 }
 #form-group-create .form-group .form-control {
-  width: 1500px;
+  width: 500px;
 }
 #form-group-create .form-check {
   padding-top: 10px;
@@ -67,5 +71,8 @@
   align-items: center;
 }
 #detail .row:nth-child(odd) {
-  background-color: cyan;
+  background-color: #93D0FF;
+}
+#detail #description {
+  overflow-y: auto;
 }/*# sourceMappingURL=style.css.map */

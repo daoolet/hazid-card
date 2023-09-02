@@ -1,0 +1,10 @@
+{% extends "hazid/base.html" %}
+
+{% block title %}Stats{% endblock %}
+
+
+{% block content %}
+    {% for i in observed_counts %}
+        <li>{{ i.i_observed }} - {{ i.count }}</li>
+    {% endfor %}
+{% endblock %}
