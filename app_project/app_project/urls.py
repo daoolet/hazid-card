@@ -21,7 +21,7 @@ from hazid import views
 
 urlpatterns = [
     path('', include("django.contrib.auth.urls")),
-    path('sign-up/', views.register, name='register'),
+    path('sign-up/', views.custom_register, name='register'),
     path('admin/', admin.site.urls),
     path('hazid/', include("hazid.urls"))
 ]

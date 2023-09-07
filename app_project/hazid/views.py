@@ -8,8 +8,9 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 
 from .forms import SurveyForm, LoginUserForm, RegisterUserForm
-from .models import Survey
+from .models import Survey, AllowedUser
 
+@login_required(login_url="/login")
 def index(request):
     surveys = Survey.objects.all()
     context = {
@@ -39,23 +40,32 @@ def read_survey(request, survey_id):
     return render(request, "hazid/detail.html", context)
 
 
-def register(request):
-    if request.method == 'POST':
+def custom_register(request):
+    if request.method == "POST":
         form = RegisterUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("login")
+            user_email = form.cleaned_data["email"]
+            
+            # if user exist in allowed list
+            if AllowedUser.objects.filter(email = user_email).exists():
+                form.save()
+                return redirect("login")
+            else:
+                return render(request, "registration/register.html", {
+                    "form": form,
+                    "error_message": "You are not allowed to register."
+                    })
     else:
         form = RegisterUserForm()
-    return render(request, 'registration/register.html', {'form': form})
+    return render(request, "registration/register.html", {"form": form})
 
 
 def custom_login(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = LoginUserForm(request, data=request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
+            email = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
@@ -66,7 +76,7 @@ def custom_login(request):
 
 def stats(request):
 
-    observed_counts = Survey.objects.values('i_observed').annotate(count=Count('i_observed'))
+    observed_counts = Survey.objects.values("i_observed").annotate(count=Count("i_observed"))
 
     context = {
         "observed_counts": observed_counts,

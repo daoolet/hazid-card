@@ -4,7 +4,7 @@ from django.utils import timezone
 
 from multiselectfield import MultiSelectField
 
-from .utils import ACTIVITY_OBSERVED, I_OBSERVED, POSSIBLE_CONSEQUENCES, CONDITIONS_RELATED, YES_NO_CHOICES
+from .utils import ACTIVITY_OBSERVED, I_OBSERVED, POSSIBLE_CONSEQUENCES, CONDITIONS_RELATED
 
 
 class CustomUserManager(BaseUserManager):
@@ -41,7 +41,18 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+    
 
+class AllowedUser(models.Model):
+    email = models.CharField(max_length=255, unique=True)
+
+    class Meta:
+        verbose_name = "Allowed User"
+        verbose_name_plural = "Allowed Users"
+
+    def __str__(self) -> str:
+        return self.email
+    
 
 class Survey(models.Model):
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -65,8 +76,8 @@ class Survey(models.Model):
     if_reported = models.CharField(max_length=100, blank=True)
 
     class Meta:
-        verbose_name = "survey"
-        verbose_name_plural = "surveys"
+        verbose_name = "Survey"
+        verbose_name_plural = "Surveys"
     
     def __str__(self):
         return self.title
