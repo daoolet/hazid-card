@@ -3,25 +3,25 @@
   font-size: 18px;
 }
 
-.navbar, header {
+.navbar {
   background-color: rgb(35, 57, 69);
 }
-.navbar .nav-link, .navbar .navbar-text, .navbar .btn.btn-outline-primary, header .nav-link, header .navbar-text, header .btn.btn-outline-primary {
+.navbar .nav-link, .navbar .btn.btn-outline-primary {
   color: white;
 }
-.navbar .btn.btn-danger, header .btn.btn-danger {
+.navbar .btn.btn-danger {
   background-color: rgb(173, 8, 18);
 }
-.navbar .nav-item.last, .navbar .navbar-text, header .nav-item.last, header .navbar-text {
+.navbar .nav-item {
   margin-right: 15px;
 }
-.navbar a, header a {
+.navbar a {
   font-size: 20px;
 }
-.navbar a .nav-link, header a .nav-link {
+.navbar a .nav-link {
   transition: color 0.5s ease;
 }
-.navbar a.nav-link:hover, header a.nav-link:hover {
+.navbar a.nav-link:hover {
   color: red;
 }
 

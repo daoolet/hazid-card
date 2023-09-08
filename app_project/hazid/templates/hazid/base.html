@@ -17,7 +17,7 @@
 </head>
 <body>
 
- <header class="text-white text-center py-3">
+ <header class="text-white text-center py-3" style="background-color: rgb(35, 57, 69)">
     <h1>HAZARD ID Card</h1>
   </header>
 
@@ -51,13 +51,15 @@
 
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
-                <span class="navbar-text">{{ user.email }} </span>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about_me' %}">{{ user.email }}</a>
+                </li>
                 <li class="nav-item">
                     <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
                 </li>
                 {% else %}
-                <li class="nav-item last">
-                    <a href="{% url 'register' %}" class="btn btn-outline-primary">Register</a>
+                <li class="nav-item">
+                    <a href="{% url 'register' %}" class="btn btn-outline-primary">Sign Up</a>
                 </li>
                 <li class="nav-item">
                     <a href="{% url 'login' %}" class="btn btn-primary">Login</a>

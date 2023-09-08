@@ -39,6 +39,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    class Meta:
+        verbose_name = "CUser"
+        verbose_name_plural = "CUsers"
+
     def __str__(self):
         return self.email
     
@@ -76,8 +80,8 @@ class Survey(models.Model):
     if_reported = models.CharField(max_length=100, blank=True)
 
     class Meta:
-        verbose_name = "Survey"
-        verbose_name_plural = "Surveys"
+        verbose_name = "Hazid"
+        verbose_name_plural = "Hazids"
     
     def __str__(self):
         return self.title

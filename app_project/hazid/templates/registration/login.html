@@ -4,7 +4,7 @@
 
 {% block content %}
     {{ form.errors }}
-    <form action="/login/" method="post">
+    <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
         <div id="form-group-login">
             <div class="form-group">
@@ -17,6 +17,8 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary mb-2">Login</button>
+                <a href="{% url 'register' %}" class="btn btn-link">Sign Up?</a>
+                <!-- <a href="{% url 'register' %}" class="btn btn-link">Forgot your password?</a> -->
             </div>
         </div>
     </form>

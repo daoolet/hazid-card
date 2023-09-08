@@ -1,3 +1,7 @@
+def get_user_id(request):
+    return request.user.id if request.user.is_authenticated else None
+
+
 YES_NO_CHOICES = [
     (True, "Yes"),
     (False, "No"),

@@ -1,0 +1,16 @@
+{% extends "hazid/base.html" %}
+
+{% block title %}About Me{% endblock %}
+
+
+{% block content %}
+
+{{ user_id }}
+{% if surveys %}
+    {{ surveys }}
+    {% else %}
+    Nothing
+{% endif %}
+
+<a href="{% url 'password_change' %}">Password change</a>
+{% endblock %}
