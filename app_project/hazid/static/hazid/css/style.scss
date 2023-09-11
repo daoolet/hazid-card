@@ -4,7 +4,6 @@
 }
 
 // index.html
-
 .navbar {
     background-color: rgb(35, 57, 69);
 
@@ -39,7 +38,7 @@
     }
 }
 
-// REGISTER & LOGIN
+// REGISTER & LOGIN & PROFILE
 #form-group-register, #form-group-login {
     margin-top: 15px;
     
@@ -54,7 +53,6 @@
 }
 
 // create_survey.html
-
 #form-group-create {
 
     label {
@@ -89,7 +87,6 @@
 }
 
 // detail.html
-
 #detail {
 
     h5 {
@@ -110,4 +107,11 @@
         overflow-y: auto;
     }
 
+}
+
+// PROFILE
+#form-group-add-allowed-user {
+    input {
+        width: 400px;
+    }
 }

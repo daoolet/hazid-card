@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from django.contrib.auth.models import User
 
 
-from .models import CustomUser, Survey
+from .models import CustomUser, Survey, AllowedUser
 
 
 class SurveyForm(forms.ModelForm):
@@ -32,3 +32,9 @@ class LoginUserForm(AuthenticationForm):
 class ChangePasswordForm(PasswordChangeForm):
     class Meta:
         model = CustomUser
+
+
+class AllowedUserForm(forms.ModelForm):
+    class Meta:
+        model = AllowedUser
+        fields = ('email',)

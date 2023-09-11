@@ -1,7 +1,8 @@
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render, HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import Count
-
+from django.views import View
+from django.utils.decorators import method_decorator
 
 from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, permission_required
@@ -9,7 +10,7 @@ from django.contrib.auth.models import Group
 from django.contrib import messages
 
 
-from .forms import SurveyForm, LoginUserForm, RegisterUserForm, ChangePasswordForm
+from .forms import SurveyForm, LoginUserForm, RegisterUserForm, ChangePasswordForm, AllowedUserForm
 from .models import Survey, AllowedUser
 from .utils import get_user_id
 
@@ -27,7 +28,7 @@ def custom_register(request):
                 group = Group.objects.get(name="default")
                 group.user_set.add(user)
 
-                login(request, user)
+                # login(request, user)
                 return redirect(reverse("index"))
             else:
                 return render(
@@ -103,16 +104,29 @@ def read_survey(request, survey_id):
     return render(request, "hazid/detail.html", context)
 
 
-def about_me(request):
+@method_decorator(login_required(login_url="/login/"), name="dispatch")
+class ProfileView(View):
+    def get(self, request):
+        current_user = request.user
+        surveys = Survey.objects.filter(author_id = current_user.id)
 
-    current_user_id = get_user_id(request)
-    surveys = Survey.objects.filter(author_id = current_user_id)
+        context = {
+            "current_user": current_user,
+            "current_user_id": current_user.id,
+            "surveys": surveys,
+        }
+    
+        return render(request, "hazid/profile.html", context)
 
-    context = {
-        "current_user_id": current_user_id,
-        "surveys": surveys,
-    }
-    return render(request, "hazid/about_me.html", context)
+    @permission_required("hazid:add_alloweduser")
+    def post(self, request):
+        form = AllowedUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse("profile")) 
+    
+        return redirect(reverse("profile"))
+
 
 def stats(request):
 

@@ -75,4 +75,8 @@
 }
 #detail #description {
   overflow-y: auto;
+}
+
+#form-group-add-allowed-user input {
+  width: 400px;
 }/*# sourceMappingURL=style.css.map */
